@@ -145,6 +145,17 @@
                                 <td>{{ $student->number }}</td>
                                 <td>{{ $student->address }}</td>
                                 <td>{{ $student->nationality }}</td>
+                                <td>
+                                    <a href="{{ route('editstudent', ['id' => $student->id]) }}"
+                                        class="btn btn-sm btn-primary">Edit</a>
+                                </td>
+                                <td>
+                                    <form method="POST" action="{{ route('deleteStudent', ['id' => $student->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -153,32 +164,6 @@
             </div>
         </div>
     </div>
-
-    {{-- <script>
-        $(document).ready(() => {
-            $('#btn_submit').click((e) => {
-                e.preventDefault();
-
-                const formdata = $('#students-info').serialize();
-
-                if (formdata.length == 100) {
-                    $.ajax({
-                        url: '/students',
-                        type: 'post',
-                        data: formdata,
-                        success: function(data) {
-                            $('#students-info').reset
-                            console.log(data)
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            console.log(errorThrown)
-                        }
-                    })
-                }
-
-            })
-        })
-    </script> --}}
 </body>
 
 </html>
