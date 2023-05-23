@@ -10,8 +10,9 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return view('welcome', ['students' => $students]);
+        return view('students', ['students' => $students]);
     }
+
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -20,7 +21,7 @@ class StudentController extends Controller
             ->orWhere('id_number', 'LIKE', '%' . $query . '%')
             ->get();
 
-        return view('welcome', ['students' => $students]);
+        return view('students', ['students' => $students]);
     }
 
     public function store(Request $request)
