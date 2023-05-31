@@ -27,18 +27,20 @@ class StudentController extends Controller
     public function store(Request $request)
     {
 
-        $student = Student::create([
-            "firstname" => $request->input('firstname'),
-            "lastname" => $request->input('lastname'),
-            "id_number" => $request->input('id_number'),
-            "date_birth" => $request->input('date_birth'),
-            "gender" => $request->input('gender'),
-            "ethnicity" => $request->input('ethnicity'),
-            "email" => $request->input('email'),
-            "number" => $request->input('number'),
-            "address" => $request->input('address'),
-            "nationality" => $request->input('nationality'),
+        $request->validate([
+            "firstname" => 'required|min:3',
+            "lastname" => 'required|min:3',
+            "id_number" => 'required|min:3',
+            "date_birth" => 'required|min:3',
+            "gender" => 'required|min:3',
+            "ethnicity" => 'required|min:3',
+            "email" => 'required|min:3',
+            "number" => 'required|min:3',
+            "address" => 'required|min:3',
+            "nationality" => 'required|min:3',
         ]);
+
+        $student = Student::create($request->all());
 
         // Redirect to a success page
         return redirect('/')->with([
