@@ -1,14 +1,14 @@
 @extends('layout')
 
 @section('content')
-    <div class="containter-sm m-5 p-5">
+    <div class="containter-sm pt-5">
         <div class="d-flex justify-content-center align-items-center flex-column">
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
             @endif
-            <form id="students-info" method="POST" action="/students" class="shadow p-3 mb-5 bg-body-tertiary rounded p-5">
+            <form id="students-info" method="POST" action="/students" class="shadow bg-body-tertiary p-3">
                 @csrf
                 <div class="row">
                     <div class="col-md">
@@ -33,8 +33,8 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                                id="id_number" name="id_number">
+                            <input type="number" min="3" class="form-control" id="floatingInput"
+                                placeholder="name@example.com" id="id_number" name="id_number">
                             <label for="floatingInput">Student ID Number</label>
                             @error('id_number')
                                 <span class="text-danger-emphasis">{{ $message }}</span>

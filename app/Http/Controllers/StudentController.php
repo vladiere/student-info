@@ -35,7 +35,7 @@ class StudentController extends Controller
             "gender" => 'required|min:3',
             "ethnicity" => 'required|min:3',
             "email" => 'required|min:3',
-            "number" => 'required|min:3',
+            "number" => 'required|min:3|numeric',
             "address" => 'required|min:3',
             "nationality" => 'required|min:3',
         ]);
@@ -63,16 +63,31 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
 
-        $student->firstname = $request->input('firstname');
-        $student->lastname = $request->input('lastname');
-        $student->id_number = $request->input('id_number');
-        $student->date_birth = $request->input('date_birth');
-        $student->gender = $request->input('gender');
-        $student->ethnicity = $request->input('ethnicity');
-        $student->email = $request->input('email');
-        $student->number = $request->input('number');
-        $student->address = $request->input('address');
-        $student->nationality = $request->input('nationality');
+        // dd($request->all());
+
+        $request->validate([
+            "firstname" => 'required|min:3',
+            "lastname" => 'required|min:3',
+            "id_number" => 'required|min:3',
+            "date_birth" => 'required|min:3',
+            "gender" => 'required|min:3',
+            "ethnicity" => 'required|min:3',
+            "email" => 'required|min:3',
+            "number" => 'required|min:3',
+            "address" => 'required|min:3',
+            "nationality" => 'required|min:3',
+        ]);
+
+        $student->firstname = $request->firstname;
+        $student->lastname = $request->lastname;
+        $student->id_number = $request->id_number;
+        $student->date_birth = $request->date_birth;
+        $student->gender = $request->gender;
+        $student->ethnicity = $request->ethnicity;
+        $student->email = $request->email;
+        $student->number = $request->number;
+        $student->address = $request->address;
+        $student->nationality = $request->nationality;
 
         $student->save();
 
