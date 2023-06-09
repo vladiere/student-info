@@ -16,19 +16,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('students');
-});
-Route::get('/search', [StudentController::class, 'search']);
+})->name('dashboard');
 
-Route::get('/', [StudentController::class, 'index']);
+Route::get('/search', [StudentController::class, 'search'])->name('search');
+
+Route::get('/', [StudentController::class, 'index'])->name('index');
 
 Route::get('/students/edit/{id}', [StudentController::class, 'editstudent'])->name('editstudent');
 
-Route::put('/students/{id}', [StudentController::class, 'update']);
+Route::put('/students/{id}', [StudentController::class, 'update'])->name('updateStudent');
 
 Route::delete('/student/{id}', [StudentController::class, 'destroy'])->name('deleteStudent');
 
 Route::get('/students', function () {
     return view('add');
-});
+})->name('addStudent');
 
-Route::post('/students', [StudentController::class, 'store']);
+Route::post('/students', [StudentController::class, 'store'])->name('storeStudent');
+
+Route::post('/students/sort', [StudentController::class, 'sort'])->name('sortStudents');

@@ -49,6 +49,19 @@ class StudentController extends Controller
         ]);
     }
 
+    public function sort(Request $request)
+    {
+
+        $request->validate([
+            'sort_by' => 'required|in:id_number,firstname,lastname,date_birth,gender,ethnicity,email,number,nationality'
+        ]);
+
+        $sortBy = $request->input('sort_by');
+
+        $students = Student::orderBy($sortBy)->get();
+
+        return view('students', ['students' => $students])->with(['success' => 'Student added successfully']);
+    }
 
     public function editstudent($id)
     {

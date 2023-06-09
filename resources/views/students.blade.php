@@ -1,33 +1,42 @@
 @extends('layout')
 
 @section('content')
+
+    @if (session('success'))
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <div class="alert alert-success alert-dismissible">
+                <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
+                <strong>{{ session('success') }}</strong>
+            </div>
+        </div>
+    @endif
     @if (count($students) == 0)
         <div class="row justify-content-center align-items-center fs-2 mt-5 pt-5 text-secondary">
             No Student/s Available
         </div>
     @else
-        <div class="row justify-content-center align-items-center">
-            <table class="table text-center text-capitalize">
-                <thead>
+        <div class="table-responsive-sm">
+            <table class="table table-sm text-capitalize table-info">
+                <thead class="text-center">
                     <tr>
-                        <th scope="col">#ID Number</th>
-                        <th scope="col">Firstname</th>
-                        <th scope="col">Lastname</th>
-                        <th scope="col">Birth Date</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Ethnicity</th>
-                        <th scope="col">Email Address</th>
-                        <th scope="col">Number</th>
-                        <th scope="col">Nationality</th>
-                        <th scope="col">Action</th>
+                        <th>#ID Number</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Birth Date</th>
+                        <th>Gender</th>
+                        <th>Ethnicity</th>
+                        <th>Email Address</th>
+                        <th>Number</th>
+                        <th>Nationality</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($students as $student)
                         <tr>
-                            <th scope="row">
+                            <td>
                                 {{ $student->id_number }}
-                            </th>
+                            </td>
                             <td>
                                 {{ $student->firstname }}
                             </td>
@@ -55,7 +64,7 @@
                             <td class="row me-0">
                                 <div class="col-2 mx-2 p-0">
                                     <a href="{{ route('editstudent', ['id' => $student->id]) }}"
-                                        class="text-success-emphasis fs-5 fw-bold text-decoration-none text-black">Edit</a>
+                                        class="text-success-emphasis fs-5 text-decoration-none text-black">Edit</a>
                                 </div>
                                 <div class="col-2">
                                     <form method="post" class="p-0 m-0"
@@ -63,8 +72,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button style="background-color: transparent; border: none"
-                                            class="text-center text-danger-emphasis fs-5 fw-bold"
-                                            type="submit">Remove</button>
+                                            class="text-center text-danger-emphasis fs-5" type="submit">Remove</button>
                                     </form>
                                 </div>
                             </td>
